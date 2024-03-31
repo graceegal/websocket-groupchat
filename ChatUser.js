@@ -64,13 +64,18 @@ class ChatUser {
 
   /** Handle a joke: broadcast to room. * */
 
-  handleJoke() {
-    // const dadJoke = ;
+  async handleJoke() {
+    const resp = await fetch("https://icanhazdadjoke.com", {
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+    const dadJoke = await resp.json();
 
     this.send(JSON.stringify({
       name: "Server",
       type: "chat",
-      text: "a message that's funny",
+      text: dadJoke.joke,
     }));
   }
 
